@@ -4,6 +4,9 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/vivand/",
   resume: "/resume.pdf",
   finsnap: "https://finsnap-six.vercel.app",
+  finsnapRepo: "https://github.com/vivandesaii/Finsnap",
+  bullpen: "https://bullpen-tau.vercel.app",
+  bullpenRepo: "https://github.com/vivandesaii/bullpen",
   sipRepo: "https://github.com/vivandesaii/vfv_to_forecast",
   song: "https://open.spotify.com/search/WAIT%20FOR%20U%20Future",
 };
@@ -32,13 +35,37 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    name: "Bullpen",
+    tagline: "Production-grade paper trading API",
+    summary:
+      "A trading competition API: users get a $100k virtual balance to trade real stocks and compete on a leaderboard ranked by portfolio return %. Trade submissions are processed asynchronously through AWS SQS FIFO queues with a dead-letter queue and exponential backoff, so trades never block the HTTP response. Redis handles price caching, sessions, rate limiting, and leaderboard sorted sets. Tracked down and fixed a Postgres connection pool exhaustion bug that was capping success rate at 83% under load, pushing it to 99.8%. Load tested with Locust: 100 concurrent users over 2 minutes, 3,705 requests, 99.8% success rate, 4ms median price lookup (Redis cache) vs 350ms live fetch, 9ms median trade submission, sustaining 30 req/sec.",
+    stack: [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "asyncpg",
+      "Redis",
+      "AWS SQS FIFO",
+      "AWS S3",
+      "Docker",
+    ],
+    metric: "99.8% success rate under load",
+    links: [
+      { href: LINKS.bullpen, label: "bullpen-tau.vercel.app" },
+      { href: LINKS.bullpenRepo, label: "github.com/vivandesaii/bullpen" },
+    ],
+  },
+  {
     name: "Finsnap",
     tagline: "Full-stack ML transaction classifier",
     summary:
       "Solves the messy-merchant-string problem: raw bank transaction descriptions are noisy and inconsistent, so Finsnap classifies each into one of 23 spending categories with a scikit-learn MLP trained on 30,000 transactions across 3,333 Canadian and GCC merchants. Served as a REST API via FastAPI with JWT auth and PostgreSQL on Railway, React frontend on Vercel, plus a user feedback loop that logs misclassification corrections for retraining — the same pattern used in production ML systems.",
     stack: ["scikit-learn", "FastAPI", "PostgreSQL", "JWT", "Railway", "React"],
     metric: "88% weighted F1 across 23 categories",
-    links: [{ href: LINKS.finsnap, label: "finsnap-six.vercel.app" }],
+    links: [
+      { href: LINKS.finsnap, label: "finsnap-six.vercel.app" },
+      { href: LINKS.finsnapRepo, label: "github.com/vivandesaii/Finsnap" },
+    ],
   },
   {
     name: "Smart SIP Engine",
@@ -97,7 +124,18 @@ export const SKILLS: { category: string; items: string[] }[] = [
   },
   {
     category: "Backend / Infra",
-    items: ["FastAPI", "PostgreSQL", "Redis", "Docker", "AWS", "REST APIs", "JWT Auth"],
+    items: [
+      "FastAPI",
+      "PostgreSQL",
+      "asyncpg / raw SQL",
+      "Redis",
+      "Docker",
+      "AWS SQS",
+      "AWS S3",
+      "REST APIs",
+      "JWT Auth",
+      "Load Testing (Locust)",
+    ],
   },
   {
     category: "ML / Quant",

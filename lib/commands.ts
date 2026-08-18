@@ -14,7 +14,7 @@ const HELP: CommandResult = {
     { text: "available commands:", tone: "muted" },
     { text: "  help        list available commands" },
     { text: "  about       who I am" },
-    { text: "  projects    Finsnap · Smart SIP Engine" },
+    { text: "  projects    Bullpen · Finsnap · Smart SIP Engine" },
     { text: "  experience  work history" },
     { text: "  contact     email · linkedin · github" },
     { text: "  resume      open resume (pdf)" },
